@@ -17,11 +17,11 @@ import static java.lang.Boolean.TRUE;
 public class TrackingNumberService {
 
     private static final Logger logger = LoggerFactory.getLogger(TrackingNumberService.class);
-    private final RedisTemplate<String, String> redisTemplate;
+//    private final RedisTemplate<String, String> redisTemplate;
 
-    public TrackingNumberService(RedisTemplate<String, String> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
+//    public TrackingNumberService(RedisTemplate<String, String> redisTemplate) {
+//        this.redisTemplate = redisTemplate;
+//    }
 
     public TrackingNumberResponse generate(String origin, String destination, BigDecimal weight,
                                            OffsetDateTime createdAt, UUID customerId,
