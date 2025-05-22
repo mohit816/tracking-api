@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+import static java.lang.Boolean.TRUE;
+
 @Service
 public class TrackingNumberService {
 
@@ -37,8 +39,9 @@ public class TrackingNumberService {
             trackingNumber = hash.substring(0, 16).toUpperCase();
 
             // Try to store in Redis (ensures uniqueness)
-            boolean unique = Boolean.TRUE.equals(redisTemplate.opsForValue()
-                    .setIfAbsent("tracking:" + trackingNumber, "1"));
+//            boolean unique = Boolean.TRUE.equals(redisTemplate.opsForValue()
+//                    .setIfAbsent("tracking:" + trackingNumber, "1"));
+            boolean unique=TRUE;
 
             if (unique) {
                 logger.info("Tracking number generated: {}", trackingNumber);
