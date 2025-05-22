@@ -17,11 +17,11 @@ import static java.lang.Boolean.TRUE;
 public class TrackingNumberService {
 
     private static final Logger logger = LoggerFactory.getLogger(TrackingNumberService.class);
-//    private final RedisTemplate<String, String> redisTemplate;
+    private final RedisTemplate<String, String> redisTemplate;
 
-//    public TrackingNumberService(RedisTemplate<String, String> redisTemplate) {
-//        this.redisTemplate = redisTemplate;
-//    }
+    public TrackingNumberService(RedisTemplate<String, String> redisTemplate) {
+        this.redisTemplate = redisTemplate;
+    }
 
     public TrackingNumberResponse generate(String origin, String destination, BigDecimal weight,
                                            OffsetDateTime createdAt, UUID customerId,
@@ -39,9 +39,8 @@ public class TrackingNumberService {
             trackingNumber = hash.substring(0, 16).toUpperCase();
 
             // Try to store in Redis (ensures uniqueness)
-//            boolean unique = Boolean.TRUE.equals(redisTemplate.opsForValue()
-//                    .setIfAbsent("tracking:" + trackingNumber, "1"));
-            boolean unique=TRUE;
+            boolean unique = Boolean.TRUE.equals(redisTemplate.opsForValue()
+                    .setIfAbsent("tracking:" + trackingNumber, "1"));
 
             if (unique) {
                 logger.info("Tracking number generated: {}", trackingNumber);
